@@ -1,18 +1,20 @@
 import express from 'express';
 import cors from 'cors';
 import morgan from 'morgan';
-import { json } from 'body-parser';
+import bodyParser from 'body-parser';
 import { errorHandler } from './middleware/error.middleware';
 import transactionRoutes from './routes/transaction.routes';
 import debtRoutes from './routes/debt.routes';
 import authRoutes from './routes/auth.routes';
+import incomeRoutes from './routes/income.routes';
 import expenseRoutes from './routes/transaction.routes';
 
 const app = express();
 
 app.use(cors());
-app.use(json());
+app.use(bodyParser.json());
 app.use(morgan('dev'));
+app.use('/api/income', incomeRoutes);
 
 app.get('/health', (_req, res) => {
   res.json({ status: 'ok' });
