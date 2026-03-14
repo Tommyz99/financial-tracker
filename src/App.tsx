@@ -9,6 +9,7 @@ import BudgetPage from "./pages/BudgetPage";
 import GhostPage from "./pages/GhostPage";
 import AdminPage from "./pages/AdminPage";
 import IncomePage from "./pages/IncomePage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
@@ -17,6 +18,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<LoginPage />} />
+          <Route path="/register" element={<RegisterPage />} />
           <Route path="/dashboard" element={<DashboardPage />} />
           <Route path="/budget" element={<BudgetPage />} />
           <Route path="/ghost" element={<GhostPage />} />

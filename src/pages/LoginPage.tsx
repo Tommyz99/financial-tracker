@@ -1,10 +1,13 @@
 // src/pages/LoginPage.tsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -39,6 +42,7 @@ const LoginPage = () => {
         <input type="email" placeholder="Email" value={email} onChange={(e) => setEmail(e.target.value)} required style={{ padding: "0.5rem", fontSize: "1rem" }} />
         <input type="password" placeholder="Password" value={password} onChange={(e) => setPassword(e.target.value)} required style={{ padding: "0.5rem", fontSize: "1rem" }} />
         <button type="submit" style={{ padding: "0.75rem", fontSize: "1rem", cursor: "pointer" }}>Login</button>
+        <button type="button" onClick={() => navigate("/register")} style={{ padding: "0.75rem", fontSize: "1rem", cursor: "pointer"}}>Register</button>
       </form>
       {error && <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>}
     </div>
