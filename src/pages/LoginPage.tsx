@@ -1,14 +1,19 @@
 // src/pages/LoginPage.tsx
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [error, setError] = useState<string>("");
+  const [success, setSuccess] = useState<string>("");
+
+  const navigate = useNavigate();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
 
     try {
       const res = await fetch("http://localhost:4000/api/auth/login", {
@@ -25,7 +30,12 @@ const LoginPage = () => {
       }
 
       localStorage.setItem("token", data.token);
-      alert(`Logged in as ${data.user.role}`);
+      setSuccess(`Logged in successfully as ${data.user.email}`);
+
+      setTimeout(() => {
+        navigate("/dashboard");
+      }, 1500);
+
     } catch (err) {
       console.error(err);
       setError("Something went wrong. Please try again.");
@@ -41,6 +51,7 @@ const LoginPage = () => {
         <button type="submit" style={{ padding: "0.75rem", fontSize: "1rem", cursor: "pointer" }}>Login</button>
       </form>
       {error && <p style={{ color: "red", marginTop: "1rem" }}>{error}</p>}
+      {success && <p style={{ color: "green", marginTop: "1rem" }}>{success}</p>}
     </div>
   );
 };

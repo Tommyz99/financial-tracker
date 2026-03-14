@@ -44,12 +44,12 @@ export const login = async (req: Request, res: Response, next: NextFunction) => 
 
     const user = await User.findOne({ email: email.toLowerCase() });
     if (!user) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Invalid email or password' });
     }
 
     const valid = await comparePassword(password, user.password);
     if (!valid) {
-      return res.status(401).json({ message: 'Invalid credentials' });
+      return res.status(401).json({ message: 'Invalid email or password' });
     }
 
     const token = generateToken(user.id, user.role);
